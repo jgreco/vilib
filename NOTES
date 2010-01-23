@@ -1,0 +1,34 @@
+GOALS:
+======
+	going for a mostly POSIX vi implementation, completely excluding an actual UI
+	library to be used by other programs looking for vi functionality
+	no escape key handling
+	no escape character sequence handling
+	ex mode, normal mode, input mode
+
+START:
+======
+	create a pointer to a vl_buff and initialize it
+		vl_buff *new = vl_init();
+
+INPUT:
+======
+	functions to take in keys from keyboard
+		vilib_q_input  -  inputs regular chars
+		vilib_q_special_input  -  input 'special' keys (movement keys, escape key)
+			up to host program to decipher escaped chars
+
+OUTPUT:
+=======
+	output list of 'cooked mode' keys equivalent to inputted actions
+		vl_atom **vilib_cooked_output(vl_buff *buff);
+
+	output text of specified portions of the internal buffer
+
+DEFINES:
+========
+	types of vl_atoms, and types of special keys
+		typedef enum { VL_UP, VL_DOWN, VL_RIGHT, VL_LEFT, VL_BACKSPACE, VL_END, VL_HOME, VL_DELETE, VL_CHAR } vl_type;
+
+	modes
+	
